@@ -1,0 +1,86 @@
+<html>
+
+<head>
+    <title>weather api </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <style>
+        .body {
+            background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGeZVznGCN-xPh2p6AJrSpGx1lvw0o6L5Khg&usqp=CAU");
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 120%;
+            background-size: cover;
+
+        }
+
+        .weather {
+            margin: 5% auto;
+            width: 40%;
+            height: 300px;
+            border-radius: 20px;
+            border: 10px solid black;
+            background-color: black;
+            color: safforn;
+        }
+
+        .row {
+            padding: 2%;
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body" align="center">
+        <div class="card" style="top: 200px;">
+
+            <h1 style="color:red" ;>Welcome To The Weather Api
+                <span id="cityname" style="font-style: italic; font:bold;"></span>
+            </h1>
+
+            <form>
+                <label style="color: black;">Enter The City Name</label><br>
+                <input type="text" id="city" /><br><br>
+                <button class="btn btn-success" value="submit" id="submit">Get weather</button>
+            </form>
+
+            <p style="color: black; font:bold" > Temperature is : <span id="temp"></span></p>
+            
+
+        </div>
+
+    </div>
+
+    <script>
+        const options = {
+            method: 'GET',
+            headers: {
+                'X-RapidAPI-Key': '50f1636162msha7a7d2eda736166p108a68jsn5ffe367cb70f',
+                'X-RapidAPI-Host': 'weather-by-api-ninjas.p.rapidapi.com'
+            }
+        };
+        const weatherapp = (city) => {
+            cityname.innerhtml = city
+
+            fetch('https://weather-by-api-ninjas.p.rapidapi.com/v1/weather?city=' + city, options)
+                .then(response => response.json())
+                .then(response => {
+                    console.log(response)
+                    temp.innerHTML = response.temp
+                    cityname.innerHTML = city
+
+                })
+        }
+        submit.addEventListener("click", (e) => {
+            e.preventDefault()
+            weatherapp(city.value)
+        })
+        weatherapp("Mumbai")
+    </script>
+</body>
+
+</html>
